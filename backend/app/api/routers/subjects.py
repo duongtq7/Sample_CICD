@@ -15,7 +15,7 @@ def get_db():
 
 @router.post("/subjects/", response_model=schemas.Subject)
 def create_subject(subject: schemas.SubjectCreate, db: Session = Depends(get_db)):
-    db_subject = models.Subject(**subject.dict())
+    db_subject = models(**subject.dict())
     db.add(db_subject)
     db.commit()
     db.refresh(db_subject)
@@ -23,7 +23,7 @@ def create_subject(subject: schemas.SubjectCreate, db: Session = Depends(get_db)
 
 @router.get("/subjects/{subject_id}", response_model=schemas.Subject)
 def read_subject(subject_id: int, db: Session = Depends(get_db)):
-    db_subject = db.query(models.Subject).filter(models.Subject.id == subject_id).first()
+    db_subject = db.query(models).filter(models.id == subject_id).first()
     if db_subject is None:
         raise HTTPException(status_code=404, detail="Subject not found")
     return db_subject
