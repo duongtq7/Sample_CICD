@@ -1,6 +1,8 @@
 from pydantic_settings  import BaseSettings
+import os
+import secrets
 
 class Settings(BaseSettings):
-    DATABASE_URL: str = "postgresql://postgres:admin@192.168.1.128:5433/sample_db"
+    DATABASE_URL: str = os.getenv("DATABASE_URL")
 
 settings = Settings() 

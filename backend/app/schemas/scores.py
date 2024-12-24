@@ -1,5 +1,4 @@
 from pydantic import BaseModel
-
 class ScoreBase(BaseModel):
     student_id: int
     subject_id: int
@@ -12,4 +11,4 @@ class Score(ScoreBase):
     id: int
 
     class Config:
-        orm_mode = True
+        orm_model = True
